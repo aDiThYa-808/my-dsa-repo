@@ -25,7 +25,8 @@ func majorityElement(nums []int) int {
 }
 
 // Notes:
-// 1. For [1 2 3 1 1 2 1], majorityElement does the following:
+// 1. Uses Boyer Moore voting algorithm.
+// 2. For [1 2 3 1 1 2 1], majorityElement does the following:
 // See 1 → count=0 → candidate=1, count=1
 // See 2 → 2 != 1 → count=0
 // See 3 → count=0 → candidate=3, count=1
