@@ -24,40 +24,48 @@ func rotate(nums []int, k int)  {
         return;
     }
 
-    mainReversedArr:= make([]int,0,len(nums));
+    var end int = len(nums)-1;
 
-    for i:=len(nums)-1;i>=0;i--{
-        mainReversedArr = append(mainReversedArr,nums[i]); 
+    for start:= range nums{
+        var temp int = nums[end];
+        if end > start{
+            nums[end] = nums[start];
+            nums[start] = temp;
+            end--;
+        }
     }
 
-    firstArr := make([]int,0,k); 
-    secondArr := make([]int,len(nums)-k);
+    end = k-1;
 
-    for i:=0;i<k;i++{
-        firstArr = append(firstArr,mainReversedArr[i]);
+    for start:=0 ; start < k ; start++{
+        var temp int = nums[end];
+        if end > start{
+            nums[end] = nums[start];
+            nums[start] = temp;
+            end--;
+        }
     }
 
-    for i:=k;i<len(mainReversedArr);i++{
-        secondArr = append(secondArr,mainReversedArr[i]);     
-    }
+    end = len(nums)-1;
 
-    finalReversedArr := make([]int,0,len(nums))
-
-    for i:=len(firstArr)-1;i>=0;i--{
-        finalReversedArr = append(finalReversedArr,firstArr[i]);
+    for start:=k;start<len(nums);start++{
+        var temp int = nums[end];
+        if end>start{
+            nums[end] = nums[start];
+            nums[start] = temp;
+            end--;
+        }
     }
-    for i:=len(secondArr)-1;i>=0;i--{
-        finalReversedArr = append(finalReversedArr,secondArr[i]);
-    }
-
-    copy(nums,finalReversedArr);
+    
 }
+
 
 // Notes: 
 // 1. k is normalized to ignore redundant rotations. 
 // 2. For example , say len(nums) is 2 and k is 7. 
 //    Rotating nums 5 times is going to give back the same array, so we ignore the first 5 rotations and only do the remaining 2. 
 //    7 % 5 = 2.
-// 3. We reverse the nums array and split it into 2 new slices. one containing first k items and the other containing the remaining items.
-// 4. We reverse both the arrays and append them to finalReversedArr to get the result. we copy it to nums.
+// 3. We first reverse the nums array.
+// 4. second, we reverse the first k items in the reversed nums array in-place.
+// 5. finally, we reverse the remaining items in the reversed nums array in-place.
 
